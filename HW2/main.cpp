@@ -4,9 +4,6 @@
 #include <vector>
 #include <random>
 #include <string>
-#include <GL/gl.h>
-#include <GL/glu.h>
-#include <SDL2/SDL.h>
 
 void gen_vec(std::vector<int>& mes, size_t n, int q) {
 	mes.clear();
