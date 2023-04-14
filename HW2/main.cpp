@@ -4,6 +4,7 @@
 #include <vector>
 #include <random>
 #include <string>
+#include <map>
 
 void gen_vec(std::vector<int>& mes, size_t n, int q) {
 	mes.clear();
@@ -46,22 +47,18 @@ void repeat_encoding(std::vector<int>& vec, size_t s) {
 
 void repeat_decoding(std::vector<int>& vec, size_t s) {
 	std::vector<int> tmp;
+	std::map<int, int> mp;
 	for(size_t i = 0; i < vec.size(); i += s) {
-		int pr = vec[i], cnt = 1;
-		
+		mp.clear();
 		for(size_t pos = 1; pos < s; ++pos) {
-			if(vec[i + pos] == pr) {
-				++cnt;
-			}
-			else {
-				--cnt;
-				if(cnt == 0) {
-					pr = vec[i + pos];
-					cnt = 1;
-				}
-			}
+			++mp[vec[i + pos]];
 		}
-
+		int max = 0, pr = 0;
+		for(const auto& item: mp)
+			if(item.second > max) {
+				max = item.second;
+				pr = item.first;
+			}
 		tmp.push_back(pr);
 	}
 	vec = tmp;
